@@ -1,0 +1,54 @@
+# configs/networking/network-plan.yaml
+# Planejamento de rede do cluster Kubernetes Hard Way
+
+clusterNetwork:
+  name: k8s-hard-way-net
+  type: docker-bridge
+  cidr: 172.171.0.0/16
+  gateway: 172.171.0.1
+  notes: "Rede Docker dedicada ao cluster (containers de nós + load balancer)."
+
+kubernetes:
+  podCIDR: 10.200.0.0/16
+  serviceCIDR: 10.32.0.0/16
+  dnsServiceIP: 10.32.0.10
+  apiServerVirtualIP: 172.171.0.10
+
+reservedIPs:
+  - name: kdwbastion
+    ip: 172.171.0.100
+  - name: kdwlb
+    ip: 172.171.0.10
+  - name: kdwcp0
+    ip: 172.171.0.11
+  - name: kdwcp1
+    ip: 172.171.0.12
+  - name: kdwcp2
+    ip: 172.171.0.13
+  - name: kdwworker0
+    ip: 172.171.0.21
+  - name: kdwworker1
+    ip: 172.171.0.22
+  - name: kdwworker2
+    ip: 172.171.0.23
+
+ports:
+  apiServer:
+    port: 6443
+    description: "Porta da API do Kubernetes."
+  etcd:
+    clientPort: 2379
+    peerPort: 2380
+  kubelet:
+    port: 10250
+  scheduler:
+    port: 10259
+  controllerManager:
+    port: 10257
+  nodePortRange:
+    from: 30000
+    to: 32767
+
+notes:
+  - "A rede 172.171.0.0/16 será criada como bridge Docker dedicada na Etapa 2."
+  - "O IP 172.171.0.10 será usado pelo nó kdwlb e como VIP da API."

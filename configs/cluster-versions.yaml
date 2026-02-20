@@ -1,0 +1,41 @@
+# configs/cluster-versions.yaml
+# Versões dos componentes do cluster
+
+kubernetes:
+  version: "1.33.8"
+  imageRepository: "registry.k8s.io"
+  notes:
+    - "Verificar matriz de compatibilidade oficial com etcd e containerd."
+    - "Usar sempre a mesma versão para todos os control planes e componentes centrais."
+
+etcd:
+  version: "3.5.21"
+  image: "registry.k8s.io/etcd/etcd:3.5.21"
+  notes:
+    - "Cluster etcd em 3 nós (kdwcp0, kdwcp1, kdwcp2)."
+
+containerRuntime:
+  name: "containerd"
+  version: "2.0.0"  # ajustar para versão exata que você escolher instalar
+  notes:
+    - "Runtime padrão recomendado pelo Kubernetes."
+    - "Configuração será feita em cada nó (control planes e workers)."
+
+cni:
+  name: "calico"
+  version: "v3.27.0"  # exemplo; na Etapa 8 podemos ajustar pra última estável compatível
+  notes:
+    - "Deve suportar NetworkPolicies."
+    - "Configuração aplicada via manifestos YAML na Etapa 8."
+
+addons:
+  coreDNS:
+    version: "1.11.0"  # exemplo
+  metricsServer:
+    version: "0.7.0"   # exemplo
+  kubernetesDashboard:
+    version: "v2.7.0"  # exemplo
+
+notes:
+  - "As versões marcadas como exemplo podem ser atualizadas conforme necessidade."
+  - "Antes de alterar versões, revisar impacto em todas as etapas já concluídas."

@@ -1,0 +1,63 @@
+# configs/networking/nodes-inventory.yaml
+# Inventário lógico dos nós do cluster
+
+clusterName: k8s-hard-way-lab
+environment: lab
+provider: docker
+
+nodes:
+  - name: kdwbastion
+    role: bastion
+    storagePath: storage/bastion
+    cpu: 1
+    memoryMiB: 1024
+    notes: "Nó administrativo, sem componentes Kubernetes."
+
+  - name: kdwlb
+    role: edge-load-balancer
+    storagePath: storage/kdwlb
+    cpu: 1
+    memoryMiB: 1024
+    notes: "Nó responsável por balancear API (6443) e tráfego HTTP/HTTPS de entrada."
+
+  - name: kdwcp0
+    role: control-plane
+    storagePath: storage/cp-01
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Control Plane 1 (etcd + api-server + controller-manager + scheduler)."
+
+  - name: kdwcp1
+    role: control-plane
+    storagePath: storage/cp-02
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Control Plane 2 (HA)."
+
+  - name: kdwcp2
+    role: control-plane
+    storagePath: storage/cp-03
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Control Plane 3 (HA)."
+
+  - name: kdwworker0
+    role: worker
+    storagePath: storage/worker-01
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Worker 1 para workloads gerais."
+
+  - name: kdwworker1
+    role: worker
+    storagePath: storage/worker-02
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Worker 2 para workloads gerais."
+
+  - name: kdwworker2
+    role: worker
+    storagePath: storage/worker-03
+    cpu: 2
+    memoryMiB: 2048
+    notes: "Worker 3 focado em testes de resiliência."
