@@ -16,6 +16,7 @@ Construir um cluster Kubernetes funcional desde o zero, entendendo cada componen
 
 ## 📂 Estrutura do Projeto
 
+```sh
 kubernetes-docker-way/
  ├── docs/ # Documentação detalhada de cada etapa
  ├── scripts/ # Scripts auxiliares e de validação
@@ -41,6 +42,7 @@ kubernetes-docker-way/
    ├── worker-01/ # Worker nodes 
    ├── worker-02/ 
    └── worker-03/
+```
 
 ## 🚀 Como Usar
 
